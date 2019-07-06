@@ -9,6 +9,7 @@ class App extends Component {
       <div className="App">
         <Sidebar />
         <Board />
+        <h1>TEST</h1>
       </div>
     );
   }
