@@ -1,16 +1,17 @@
-import React, { Component } from "react";
-import Card from "./Card";
+import React, { Component } from 'react'
+import Task from "./Task"
 
 export default class Column extends Component {
-  render() {
-    return (
-      <div className="column">
-        <h2 className="title">{this.props.title}</h2>
-        {this.props.tasks.map(e => {
-          return <Card taskTitle={e.title} steps={e.subSteps} />;
-        })}
-        <button onClick={this.props.addCard}>add</button>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="column">
+                <h1>Todo</h1>
+                <Task />
+                <div className="addTask">
+                    <input type="text" placeholder="Add new Task"></input>
+                    <button>+</button>
+                </div>
+            </div>
+        )
+    }
 }
