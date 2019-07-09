@@ -18,7 +18,6 @@ export default class Board extends Component {
   render() {
     return (
       <div className="board">
-        <h1>{this.props.match.params.boardname}</h1>
         <div>
           {this.state.columns.map(column => {
             return <Column data={column} />;
