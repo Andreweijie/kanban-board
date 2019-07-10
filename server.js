@@ -28,7 +28,7 @@ app.get("/new-board", (req, res) => {
       console.log(err);
     } else {
       console.log(docs);
-      res.json({ message: "success", newBoard: docs.name });
+      res.json({ message: "success", name: docs.name });
     }
   });
 });
@@ -41,7 +41,7 @@ app.get("/new-column", (req, res) => {
       console.log(err);
     } else {
       console.log(docs);
-      res.json({ message: "success", newcolumn: docs.name, board: docs.board });
+      res.json({ message: "success", name: docs.name, board: docs.board });
     }
   });
 });

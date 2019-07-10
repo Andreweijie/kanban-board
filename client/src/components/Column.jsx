@@ -6,7 +6,8 @@ export default class Column extends Component {
     tasks: [],
     newtask: "",
     column: "",
-    board: ""
+    board: "",
+    showSub: false
   };
   componentDidMount() {
     fetch(
@@ -21,8 +22,8 @@ export default class Column extends Component {
   addNewTask = () => {
     const newTask = {
       name: this.state.newtask,
-      column: this.state.column,
-      board: this.state.board
+      column: this.props.data.name,
+      board: this.props.data.board
     };
 
     fetch("/new-task", {
@@ -33,7 +34,16 @@ export default class Column extends Component {
       body: JSON.stringify(newTask)
     })
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => {
+        this.setState({
+          tasks: this.state.tasks.concat(data)
+        });
+      });
+  };
+  showSubTask = () => {
+    this.setState({
+      showSub: !this.state.showSub
+    });
   };
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -51,8 +61,12 @@ export default class Column extends Component {
             onChange={this.onChange}
             type="text"
             placeholder="Add new Task"
+            onClick={this.showSubTask}
           />
           <button onClick={this.addNewTask}>+</button>
+          {this.state.showSub ? (
+            <input id="subtask" placeholder="Add new sub task" type="text" />
+          ) : null}
         </div>
       </div>
     );

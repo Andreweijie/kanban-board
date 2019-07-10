@@ -1,62 +1,64 @@
-.App{
-  display:flex;
-  .sidebar{
+.App {
+  display: flex;
+  .sidebar {
     height: 100vh;
-    width: 6vw;
+    width: 15%;
     background: #99d6ff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    h1{
+    h1 {
       font-size: 20px;
     }
-    a{
+    a {
       text-decoration: none;
       margin: 3px;
       color: white;
     }
-    ::placeholder{
-      color:white;
-      } 
-    #newboard{
+    ::placeholder {
+      color: white;
+    }
+    #newboard {
       margin: 3px;
       width: 90%;
       border: none;
       background: transparent;
     }
   }
-  .board{
-    display:flex;
+  .board {
+    display: flex;
     height: 100vh;
     width: 94vw;
     background-color: aliceblue;
     align-items: flex-start;
-    .addCol{
+    .columns {
+      display: flex;
+    }
+    .addCol {
       background: #66b3ff;
       width: 300px;
-      border-radius:  0.5em;
+      border-radius: 0.5em;
       padding: 10px;
       margin: 20px;
       display: flex;
       justify-content: space-between;
-      ::placeholder{
-        color:white;
-        } 
-      input{
-        border:transparent;
+      ::placeholder {
+        color: white;
+      }
+      input {
+        border: transparent;
         background: #66b3ff;
         font-size: 20px;
-        color:white;
-        
-        }
-        button{
-          border: transparent;
-          background: #66b3ff;
-          font-size: 20px;
-          color: white;
-        }
+        color: white;
+      }
+      button {
+        border: transparent;
+        background: #66b3ff;
+        font-size: 20px;
+        color: white;
+      }
     }
-    .column{
+    .column {
       height: 90vh;
       width: 20vw;
       background: #66b3ff;
@@ -64,41 +66,39 @@
       margin: 20px;
       flex-direction: column;
       align-items: center;
-      border-radius:  0.5em;
-      .addTask{
+      border-radius: 0.5em;
+      .addTask {
         background-color: white;
         width: 85%;
-        border-radius:  0.5em;
+        border-radius: 0.5em;
         padding: 10px;
         margin: 10px;
         display: flex;
         justify-content: space-between;
-        input{
-          border:transparent;
+        input {
+          border: transparent;
           font-size: 20px;
         }
-        button{
+        button {
           border: transparent;
           background-color: white;
           font-size: 20px;
           color: #66b3ff;
         }
       }
-      .task{
+      .task {
         background-color: white;
         width: 85%;
-        border-radius:  0.5em;
+        border-radius: 0.5em;
         padding: 10px;
-        div{
+        div {
           display: flex;
           justify-content: space-between;
         }
-        h1{
+        h1 {
           font-size: 20px;
-          
         }
       }
     }
   }
-  
 }
