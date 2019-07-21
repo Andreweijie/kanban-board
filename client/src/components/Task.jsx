@@ -5,6 +5,9 @@ export default class Task extends Component {
     subAdd: "",
     subTasks: []
   };
+  componentDidMount() {
+    this.setState({ subTasks: this.props.sub });
+  }
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -13,13 +16,16 @@ export default class Task extends Component {
   handleKeyPress = event => {
     if (event.key === "Enter") {
       this.addSubTask();
+      this.setState({ [event.target.id]: "" });
     }
   };
 
   addSubTask = () => {
     this.setState(
       { subTasks: this.state.subTasks.concat(this.state.subAdd) },
-      () => this.sendSubs()
+      () => {
+        this.sendSubs();
+      }
     );
   };
 
@@ -54,7 +60,7 @@ export default class Task extends Component {
       <div className="task">
         <h1>{this.props.data.name}</h1>
         <ul>
-          {this.props.sub.map(tasks => {
+          {this.state.subTasks.map(tasks => {
             return (
               <li>
                 {tasks}
@@ -67,6 +73,7 @@ export default class Task extends Component {
             type="text"
             onChange={this.onChange}
             onKeyPress={this.handleKeyPress}
+            value={this.state.subAdd}
           />
         </ul>
       </div>

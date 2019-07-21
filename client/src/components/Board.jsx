@@ -33,6 +33,7 @@ export default class Board extends Component {
   handleKeyPress = event => {
     if (event.key === "Enter") {
       this.addColumn();
+      this.setState({ [event.target.id]: "" });
     }
   };
 
@@ -67,6 +68,7 @@ export default class Board extends Component {
             onChange={this.onChange}
             type="text"
             placeholder="Add new Column"
+            value={this.state.newColumn}
           />
         </div>
       </div>

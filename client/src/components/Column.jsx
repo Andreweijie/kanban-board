@@ -6,8 +6,7 @@ export default class Column extends Component {
     tasks: [],
     newtask: "",
     column: "",
-    board: "",
-    showSub: false
+    board: ""
   };
   componentDidMount() {
     fetch(
@@ -22,6 +21,7 @@ export default class Column extends Component {
   handleKeyPress = event => {
     if (event.key === "Enter") {
       this.addNewTask();
+      this.setState({ [event.target.id]: "" });
     }
   };
 
@@ -49,11 +49,7 @@ export default class Column extends Component {
         });
     }
   };
-  showSubTask = () => {
-    this.setState({
-      showSub: !this.state.showSub
-    });
-  };
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -79,6 +75,7 @@ export default class Column extends Component {
           placeholder="Add Task"
           onClick={this.showSubTask}
           onKeyPress={this.handleKeyPress}
+          value={this.state.newtask}
         />
       </div>
     );
