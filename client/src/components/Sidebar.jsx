@@ -37,6 +37,7 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div className="sidebar">
+        <img src={require("../MIKAN.png")} />
         <h1>Boards</h1>
         {this.state.boards.map(board => {
           let query = "/board/" + board.name;
@@ -46,7 +47,7 @@ export default class Sidebar extends Component {
           id="newBoard"
           onChange={this.onChange}
           type="text"
-          placeholder="Add new Board"
+          placeholder="Add Board"
           onKeyPress={this.handleKeyPress}
         />
       </div>

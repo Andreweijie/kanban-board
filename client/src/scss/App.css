@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito&display=swap");
+.App {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: Nunito;
+}
+
+.App .sidebar {
+  height: 100vh;
+  width: 15em;
+  background: #25313e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.App .sidebar img {
+  height: 90px;
+  margin-top: 24px;
+}
+
+.App .sidebar h1 {
+  font-size: 2.5em;
+  color: white;
+}
+
+.App .sidebar a {
+  text-decoration: none;
+  margin-bottom: 16px;
+  color: white;
+  font-family: Nunito;
+  font-size: 1.6em;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  padding-left: 24px;
+  -webkit-transition: 0.5px;
+  transition: 0.5px;
+  width: 90%;
+}
+
+.App .sidebar a:hover {
+  background-color: #192431;
+}
+
+.App .sidebar ::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.5;
+}
+
+.App .sidebar :-ms-input-placeholder {
+  color: white;
+  opacity: 0.5;
+}
+
+.App .sidebar ::-ms-input-placeholder {
+  color: white;
+  opacity: 0.5;
+}
+
+.App .sidebar ::placeholder {
+  color: white;
+  opacity: 0.5;
+}
+
+.App .sidebar #newBoard {
+  width: 80%;
+  border: none;
+  padding: 8px;
+  border-radius: 2px;
+  background-color: #192431;
+  color: white;
+  font-size: 1em;
+  margin-top: 16px;
+}
+
+.App .sidebar #newBoard:focus {
+  outline: none;
+}
+
+.App .board {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  width: 94vw;
+  background-color: #f2f2f2;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.App .board .columns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.App .board .addCol {
+  background: #fff;
+  width: 15%;
+  border-radius: 0.5em;
+  padding: 10px;
+  margin: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.App .board .addCol ::-webkit-input-placeholder {
+  color: black;
+  opacity: 0.5;
+}
+
+.App .board .addCol :-ms-input-placeholder {
+  color: black;
+  opacity: 0.5;
+}
+
+.App .board .addCol ::-ms-input-placeholder {
+  color: black;
+  opacity: 0.5;
+}
+
+.App .board .addCol ::placeholder {
+  color: black;
+  opacity: 0.5;
+}
+
+.App .board .addCol input {
+  border: transparent;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.App .board .addCol input:focus {
+  outline: none;
+}
+
+.App .board .column {
+  height: 90vh;
+  width: 18vw;
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 0.5em;
+  padding: 10px;
+  -webkit-box-shadow: -0.2rem 0.75rem 3.375rem 0 rgba(78, 98, 117, 0.1);
+          box-shadow: -0.2rem 0.75rem 3.375rem 0 rgba(78, 98, 117, 0.1);
+}
+
+.App .board .column h1 {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin-left: 16px;
+}
+
+.App .board .column input {
+  background-color: #fff;
+  width: 85%;
+  border-radius: 0.5em;
+  padding: 10px;
+  margin-top: 24px;
+  border: 2px solid grey;
+  font-size: 16px;
+  font-family: Nunito;
+}
+
+.App .board .column input:focus {
+  outline: none;
+}
+
+.App .board .column .task {
+  background-color: white;
+  -webkit-box-shadow: 0rem 0.1rem 1.375rem 0 rgba(78, 98, 117, 0.2);
+          box-shadow: 0rem 0.1rem 1.375rem 0 rgba(78, 98, 117, 0.2);
+  width: 85%;
+  border-radius: 0.5em;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.App .board .column .task ul li {
+  list-style-type: circle;
+  width: 85%;
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+.App .board .column .task ul li button {
+  float: right;
+  border: none;
+  border-radius: 0.5em;
+  opacity: 0.6;
+}
+
+.App .board .column .task #subAdd {
+  padding: 4px;
+  background: rgba(78, 98, 117, 0.2);
+  border: none;
+  width: 80%;
+  padding-left: 8px;
+}
+
+.App .board .column .task h1 {
+  font-size: 20px;
+  margin: 0px;
+}
+/*# sourceMappingURL=App.css.map */

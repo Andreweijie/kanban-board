@@ -46,6 +46,21 @@ app.get("/new-column", (req, res) => {
   });
 });
 
+//endpoint for updating list of subtasks
+app.post("/update-sub", (req, res) => {
+  taskdb.update(
+    {
+      name: req.body.name,
+      column: req.body.column,
+      board: req.body.board
+    },
+    { $set: { subTasks: req.body.subTasks } },
+    { multi: false },
+    function(err, numReplaced) {
+      console.log(numReplaced);
+    }
+  );
+});
 //endpoint for retrieving list of boards
 app.get("/boards", (req, res) => {
   boarddb.find({}, (err, docs) => {

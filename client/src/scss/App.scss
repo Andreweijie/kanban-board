@@ -1,102 +1,146 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito&display=swap");
+
 .App {
   display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: Nunito;
   .sidebar {
     height: 100vh;
-    width: 15%;
-    background: #99d6ff;
+    width: 15em;
+    background: #25313e;
     display: flex;
     flex-direction: column;
     align-items: center;
+    img {
+      height: 90px;
+      margin-top: 24px;
+    }
     h1 {
-      font-size: 20px;
+      font-size: 2.5em;
+      color: white;
     }
     a {
       text-decoration: none;
-      margin: 3px;
+      margin-bottom: 16px;
       color: white;
+      font-family: Nunito;
+      font-size: 1.6em;
+      align-self: flex-start;
+      padding-left: 24px;
+      transition: 0.5px;
+      width: 90%;
+      &:hover {
+        background-color: #192431;
+      }
     }
     ::placeholder {
       color: white;
+      opacity: 0.5;
     }
-    #newboard {
-      margin: 3px;
-      width: 90%;
+    #newBoard {
+      width: 80%;
       border: none;
-      background: transparent;
+      padding: 8px;
+      border-radius: 2px;
+      background-color: #192431;
+      color: white;
+      font-size: 1em;
+      margin-top: 16px;
+      &:focus {
+        outline: none;
+      }
     }
   }
   .board {
     display: flex;
     height: 100vh;
     width: 94vw;
-    background-color: aliceblue;
+    background-color: #f2f2f2;
     align-items: flex-start;
     .columns {
       display: flex;
     }
     .addCol {
-      background: #66b3ff;
-      width: 300px;
+      background: #fff;
+      width: 15%;
       border-radius: 0.5em;
       padding: 10px;
       margin: 20px;
       display: flex;
       justify-content: space-between;
       ::placeholder {
-        color: white;
+        color: black;
+        opacity: 0.5;
       }
       input {
         border: transparent;
-        background: #66b3ff;
-        font-size: 20px;
-        color: white;
-      }
-      button {
-        border: transparent;
-        background: #66b3ff;
-        font-size: 20px;
-        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        &:focus {
+          outline: none;
+        }
       }
     }
     .column {
       height: 90vh;
-      width: 20vw;
-      background: #66b3ff;
+      width: 18vw;
+      background: #fff;
       display: flex;
       margin: 20px;
       flex-direction: column;
       align-items: center;
       border-radius: 0.5em;
-      .addTask {
-        background-color: white;
+      padding: 10px;
+      box-shadow: -0.2rem 0.75rem 3.375rem 0 rgba(78, 98, 117, 0.1);
+      h1 {
+        align-self: flex-start;
+        margin-left: 16px;
+      }
+      input {
+        background-color: #fff;
         width: 85%;
         border-radius: 0.5em;
         padding: 10px;
-        margin: 10px;
-        display: flex;
-        justify-content: space-between;
-        input {
-          border: transparent;
-          font-size: 20px;
-        }
-        button {
-          border: transparent;
-          background-color: white;
-          font-size: 20px;
-          color: #66b3ff;
+        margin-top: 24px;
+        border: 2px solid grey;
+        font-size: 16px;
+        font-family: Nunito;
+        &:focus {
+          outline: none;
         }
       }
       .task {
         background-color: white;
+        box-shadow: 0rem 0.1rem 1.375rem 0 rgba(78, 98, 117, 0.2);
         width: 85%;
         border-radius: 0.5em;
-        padding: 10px;
-        div {
-          display: flex;
-          justify-content: space-between;
+        padding: 16px;
+        margin-top: 16px;
+        ul {
+          li {
+            list-style-type: circle;
+            width: 85%;
+            font-weight: bold;
+            opacity: 0.9;
+            button {
+              float: right;
+              border: none;
+              border-radius: 0.5em;
+              opacity: 0.6;
+            }
+          }
+        }
+        #subAdd {
+          padding: 4px;
+          background: rgba(78, 98, 117, 0.2);
+          border: none;
+          width: 80%;
+          padding-left: 8px;
         }
         h1 {
           font-size: 20px;
+          margin: 0px;
         }
       }
     }

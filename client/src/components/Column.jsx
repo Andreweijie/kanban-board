@@ -19,26 +19,35 @@ export default class Column extends Component {
       });
   }
 
-  addNewTask = () => {
-    const newTask = {
-      name: this.state.newtask,
-      column: this.props.data.name,
-      board: this.props.data.board
-    };
+  handleKeyPress = event => {
+    if (event.key === "Enter") {
+      this.addNewTask();
+    }
+  };
 
-    fetch("/new-task", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newTask)
-    })
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          tasks: this.state.tasks.concat(data)
+  addNewTask = () => {
+    if (this.state.newtask != "") {
+      const newTask = {
+        name: this.state.newtask,
+        column: this.props.data.name,
+        board: this.props.data.board,
+        subTasks: []
+      };
+
+      fetch("/new-task", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newTask)
+      })
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            tasks: this.state.tasks.concat(data)
+          });
         });
-      });
+    }
   };
   showSubTask = () => {
     this.setState({
@@ -53,21 +62,24 @@ export default class Column extends Component {
       <div className="column">
         <h1>{this.props.data.name}</h1>
         {this.state.tasks.map(task => {
-          return <Task data={task} />;
+          return (
+            <Task
+              column={this.props.data.name}
+              board={this.props.data.board}
+              data={task}
+              sub={task.subTasks}
+            />
+          );
         })}
-        <div className="addTask">
-          <input
-            id="newtask"
-            onChange={this.onChange}
-            type="text"
-            placeholder="Add new Task"
-            onClick={this.showSubTask}
-          />
-          <button onClick={this.addNewTask}>+</button>
-          {this.state.showSub ? (
-            <input id="subtask" placeholder="Add new sub task" type="text" />
-          ) : null}
-        </div>
+
+        <input
+          id="newtask"
+          onChange={this.onChange}
+          type="text"
+          placeholder="Add Task"
+          onClick={this.showSubTask}
+          onKeyPress={this.handleKeyPress}
+        />
       </div>
     );
   }

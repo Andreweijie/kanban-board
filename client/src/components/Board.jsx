@@ -30,6 +30,12 @@ export default class Board extends Component {
     }
   }
 
+  handleKeyPress = event => {
+    if (event.key === "Enter") {
+      this.addColumn();
+    }
+  };
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -56,12 +62,12 @@ export default class Board extends Component {
         </div>
         <div className="addCol">
           <input
+            onKeyPress={this.handleKeyPress}
             id="newColumn"
             onChange={this.onChange}
             type="text"
             placeholder="Add new Column"
           />
-          <button onClick={this.addColumn}>+</button>
         </div>
       </div>
     );
