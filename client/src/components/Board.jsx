@@ -6,6 +6,7 @@ export default class Board extends Component {
     columns: [],
     newColumn: ""
   };
+
   componentDidMount() {
     fetch("/columns?board=" + this.props.match.params.boardname)
       .then(res => res.json())
