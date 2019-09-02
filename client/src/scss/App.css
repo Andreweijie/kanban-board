@@ -93,7 +93,7 @@
   display: flex;
   height: 100vh;
   width: 94vw;
-  background-color: #f2f2f2;
+  background-color: #f1f3f7;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
@@ -150,8 +150,7 @@
 }
 
 .App .board .column {
-  height: 90vh;
-  width: 18vw;
+  width: 300px;
   background: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -199,6 +198,10 @@
   border-radius: 0.5em;
   padding: 16px;
   margin-top: 16px;
+}
+
+.App .board .column .task ul {
+  margin: 8px;
 }
 
 .App .board .column .task ul li {

@@ -18,6 +18,21 @@ export default class Column extends Component {
       });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.data.board !== prevProps.data.board) {
+      // call the fetch function again
+      fetch(
+        `/tasks?column=${this.props.data.name}&board=${this.props.data.board}`
+      )
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            tasks: data
+          });
+        });
+    }
+  }
+
   handleKeyPress = event => {
     if (event.key === "Enter") {
       this.addNewTask();

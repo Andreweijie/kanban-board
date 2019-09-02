@@ -56,7 +56,7 @@
     display: flex;
     height: 100vh;
     width: 94vw;
-    background-color: #f2f2f2;
+    background-color: #f1f3f7;
     align-items: flex-start;
     .columns {
       display: flex;
@@ -83,8 +83,8 @@
       }
     }
     .column {
-      height: 90vh;
-      width: 18vw;
+      //height: 90vh;
+      width: 300px;
       background: #fff;
       display: flex;
       margin: 20px;
@@ -118,6 +118,7 @@
         padding: 16px;
         margin-top: 16px;
         ul {
+          margin: 8px;
           li {
             list-style-type: circle;
             width: 85%;
