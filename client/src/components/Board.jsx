@@ -43,9 +43,7 @@ export default class Board extends Component {
   };
   addColumn = () => {
     fetch(
-      `/new-column?column=${this.state.newColumn}&board=${
-        this.props.match.params.boardname
-      }`
+      `/new-column?column=${this.state.newColumn}&board=${this.props.match.params.boardname}`
     )
       .then(res => res.json())
       .then(data =>
@@ -56,7 +54,7 @@ export default class Board extends Component {
   };
   render() {
     return (
-      <div className="board">
+      <div className="board" style={{ animation: "fadeIn 0.5s" }}>
         <div className="columns">
           {this.state.columns.map(column => {
             return <Column data={column} />;

@@ -4,6 +4,7 @@
   display: -ms-flexbox;
   display: flex;
   min-height: 100vh;
+  height: auto;
   width: 100%;
   font-family: Nunito;
 }
@@ -42,13 +43,18 @@
   font-size: 1.6em;
   -ms-flex-item-align: start;
       align-self: flex-start;
-  padding-left: 24px;
+  margin: 0 auto;
+  padding: 8px;
   -webkit-transition: 0.5px;
   transition: 0.5px;
   width: 90%;
 }
 
 .App .sidebar a:hover {
+  background-color: #192431;
+}
+
+.App .sidebar a:focus {
   background-color: #192431;
 }
 
@@ -91,7 +97,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   width: 94vw;
   background-color: #f2f2f2;
   -webkit-box-align: start;
@@ -107,7 +114,7 @@
 
 .App .board .addCol {
   background: #fff;
-  width: 15%;
+  width: 200px;
   border-radius: 0.5em;
   padding: 10px;
   margin: 20px;
@@ -139,18 +146,22 @@
   opacity: 0.5;
 }
 
-.App .board .addCol input {
+.App .board .addCol #newColumn {
   border: transparent;
   font-size: 16px;
   font-weight: bold;
+  width: 200px;
 }
 
-.App .board .addCol input:focus {
+.App .board .addCol #newColumn:focus {
   outline: none;
 }
 
 .App .board .column {
-  height: 90vh;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  min-height: 90vh;
+  height: auto;
   width: 18vw;
   background: #fff;
   display: -webkit-box;
@@ -168,6 +179,14 @@
   padding: 10px;
   -webkit-box-shadow: -0.2rem 0.75rem 3.375rem 0 rgba(78, 98, 117, 0.1);
           box-shadow: -0.2rem 0.75rem 3.375rem 0 rgba(78, 98, 117, 0.1);
+  -webkit-animation-name: fadeIn;
+          animation-name: fadeIn;
+  -webkit-animation-duration: 1ms;
+          animation-duration: 1ms;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in;
+          animation-timing-function: ease-in;
 }
 
 .App .board .column h1 {
@@ -185,10 +204,14 @@
   border: 2px solid grey;
   font-size: 16px;
   font-family: Nunito;
+  -webkit-transition: border 0.5s;
+  transition: border 0.5s;
+  font-weight: bold;
 }
 
 .App .board .column input:focus {
   outline: none;
+  border: 2px solid black;
 }
 
 .App .board .column .task {
@@ -199,6 +222,19 @@
   border-radius: 0.5em;
   padding: 16px;
   margin-top: 16px;
+}
+
+.App .board .column .task .head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.App .board .column .task .head .delete {
+  height: 28px;
 }
 
 .App .board .column .task ul li {
@@ -226,5 +262,43 @@
 .App .board .column .task h1 {
   font-size: 20px;
   margin: 0px;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  -webkit-transition: opacity 500ms ease-in;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  -webkit-transition: opacity 300ms ease-in;
+  transition: opacity 300ms ease-in;
 }
 /*# sourceMappingURL=App.css.map */

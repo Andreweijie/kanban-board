@@ -57,12 +57,19 @@ export default class Task extends Component {
   };
   render() {
     return (
-      <div className="task">
-        <h1>{this.props.data.name}</h1>
+      <div className="task" style={{ animation: "fadeIn 1s" }}>
+        <div className="head">
+          <h1>{this.props.data.name}</h1>
+          <img
+            className="delete"
+            onClick={() => this.props.delete(this.props.data)}
+            src="https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/close-512.png"
+          />
+        </div>
         <ul>
           {this.state.subTasks.map(tasks => {
             return (
-              <li>
+              <li style={{ animation: "fadeIn 1s" }}>
                 {tasks}
                 <button onClick={() => this.removeSub(tasks)}>X</button>
               </li>

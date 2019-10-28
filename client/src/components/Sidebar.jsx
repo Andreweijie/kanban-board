@@ -27,7 +27,8 @@ export default class Sidebar extends Component {
       .then(res => res.json())
       .then(data =>
         this.setState({
-          boards: this.state.boards.concat(data)
+          boards: this.state.boards.concat(data),
+          newBoard: ""
         })
       );
   };
@@ -41,7 +42,11 @@ export default class Sidebar extends Component {
         <h1>Boards</h1>
         {this.state.boards.map(board => {
           let query = "/board/" + board.name;
-          return <Link to={query}>{board.name}</Link>;
+          return (
+            <Link style={{ animation: "fadeIn 1s" }} to={query}>
+              {board.name}
+            </Link>
+          );
         })}
         <input
           id="newBoard"
@@ -49,6 +54,7 @@ export default class Sidebar extends Component {
           type="text"
           placeholder="Add Board"
           onKeyPress={this.handleKeyPress}
+          value={this.state.newBoard}
         />
       </div>
     );
