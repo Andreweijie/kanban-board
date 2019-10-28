@@ -100,7 +100,7 @@
   min-height: 100vh;
   height: auto;
   width: 94vw;
-  background-color: #f2f2f2;
+  background-color: #f1f3f7;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
@@ -235,6 +235,10 @@
 
 .App .board .column .task .head .delete {
   height: 28px;
+}
+
+.App .board .column .task ul {
+  margin: 8px;
 }
 
 .App .board .column .task ul li {

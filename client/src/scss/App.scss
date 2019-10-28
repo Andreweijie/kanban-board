@@ -62,7 +62,7 @@
     min-height: 100vh;
     height: auto;
     width: 94vw;
-    background-color: #f2f2f2;
+    background-color: #f1f3f7;
     align-items: flex-start;
     .columns {
       display: flex;
@@ -141,6 +141,7 @@
           }
         }
         ul {
+          margin: 8px;
           li {
             list-style-type: circle;
             width: 85%;
