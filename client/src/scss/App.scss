@@ -64,6 +64,7 @@
     width: 94vw;
     background-color: #f1f3f7;
     align-items: flex-start;
+    padding: 32px;
     .columns {
       display: flex;
     }
@@ -96,8 +97,8 @@
       width: 18vw;
       background: #fff;
       display: flex;
-      margin: 20px;
       flex-direction: column;
+      margin-right: 32px;
       align-items: center;
       border-radius: 0.5em;
       padding: 10px;
