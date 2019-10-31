@@ -59,7 +59,7 @@ export default class Board extends Component {
       <div className="board" style={{ animation: "fadeIn 0.5s" }}>
         <div className="columns">
           {this.state.columns.map(column => {
-            return <Column data={column} />;
+            return <Column key={column._id} data={column} />;
           })}
         </div>
         <div className="addCol">

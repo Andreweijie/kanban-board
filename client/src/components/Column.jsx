@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { CSSTransition } from "react-transition-group";
 import Task from "./Task";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 export default class Column extends Component {
   state = {
@@ -83,22 +83,42 @@ export default class Column extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
   render() {
+    console.log(this.props.data);
     return (
       <div className="column" style={{ animation: "fadeIn 0.5s" }}>
         <h1>{this.props.data.name}</h1>
-        <Droppable droppableId={this.props.data._id}>
+        <Droppable
+          droppableId={this.props.data._id}
+          direction="vertical"
+          mode="standard"
+        >
           {provided => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
+            <div
+              className="task-list"
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
               {this.state.tasks.map((task, index) => {
                 return (
-                  <Task
-                    delete={this.deleteTask}
-                    column={this.props.data.name}
-                    board={this.props.data.board}
-                    data={task}
-                    sub={task.subTasks}
-                    index={index}
-                  />
+                  <Draggable key={index} draggableId={task._id} index={index}>
+                    {provided => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <Task
+                          key={task._id}
+                          delete={this.deleteTask}
+                          column={this.props.data.name}
+                          board={this.props.data.board}
+                          data={task}
+                          sub={task.subTasks}
+                          index={index}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
                 );
               })}
               {provided.placeholder}
