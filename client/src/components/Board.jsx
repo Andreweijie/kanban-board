@@ -54,29 +54,25 @@ export default class Board extends Component {
       );
   };
 
-  onDragEnd = () => {};
-
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="board" style={{ animation: "fadeIn 0.5s" }}>
-          <div className="columns">
-            {this.state.columns.map(column => {
-              return <Column data={column} />;
-            })}
-          </div>
-          <div className="addCol">
-            <input
-              onKeyPress={this.handleKeyPress}
-              id="newColumn"
-              onChange={this.onChange}
-              type="text"
-              placeholder="Add new Column"
-              value={this.state.newColumn}
-            />
-          </div>
+      <div className="board" style={{ animation: "fadeIn 0.5s" }}>
+        <div className="columns">
+          {this.state.columns.map(column => {
+            return <Column data={column} />;
+          })}
         </div>
-      </DragDropContext>
+        <div className="addCol">
+          <input
+            onKeyPress={this.handleKeyPress}
+            id="newColumn"
+            onChange={this.onChange}
+            type="text"
+            placeholder="Add new Column"
+            value={this.state.newColumn}
+          />
+        </div>
+      </div>
     );
   }
 }

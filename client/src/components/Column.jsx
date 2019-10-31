@@ -84,40 +84,38 @@ export default class Column extends Component {
   };
   render() {
     return (
-      <Droppable droppableId={this.props.data._id}>
-        {provided => (
-          <div
-            ref={provided.ref}
-            {...provided.droppableProps}
-            className="column"
-            style={{ animation: "fadeIn 0.5s" }}
-          >
-            <h1>{this.props.data.name}</h1>
-            {this.state.tasks.map((task, index) => {
-              return (
-                <Task
-                  delete={this.deleteTask}
-                  column={this.props.data.name}
-                  board={this.props.data.board}
-                  data={task}
-                  sub={task.subTasks}
-                  index={index}
-                />
-              );
-            })}
-            {provided.placeholder}
-            <input
-              id="newtask"
-              onChange={this.onChange}
-              type="text"
-              placeholder="Add Task"
-              onClick={this.showSubTask}
-              onKeyPress={this.handleKeyPress}
-              value={this.state.newtask}
-            />
-          </div>
-        )}
-      </Droppable>
+      <div className="column" style={{ animation: "fadeIn 0.5s" }}>
+        <h1>{this.props.data.name}</h1>
+        <Droppable droppableId={this.props.data._id}>
+          {provided => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {this.state.tasks.map((task, index) => {
+                return (
+                  <Task
+                    delete={this.deleteTask}
+                    column={this.props.data.name}
+                    board={this.props.data.board}
+                    data={task}
+                    sub={task.subTasks}
+                    index={index}
+                  />
+                );
+              })}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+
+        <input
+          id="newtask"
+          onChange={this.onChange}
+          type="text"
+          placeholder="Add Task"
+          onClick={this.showSubTask}
+          onKeyPress={this.handleKeyPress}
+          value={this.state.newtask}
+        />
+      </div>
     );
   }
 }

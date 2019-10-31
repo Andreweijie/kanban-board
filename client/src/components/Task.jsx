@@ -61,7 +61,7 @@ export default class Task extends Component {
       <Draggable draggableId={this.props.data._id} index={this.props.index}>
         {provided => (
           <div
-            ref={provided.ref}
+            ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             className="task"
