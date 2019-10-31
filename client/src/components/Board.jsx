@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Column from "./Column";
+import { DragDropContext } from "react-beautiful-dnd";
 
 export default class Board extends Component {
   state = {
@@ -52,25 +53,30 @@ export default class Board extends Component {
         })
       );
   };
+
+  onDragEnd = () => {};
+
   render() {
     return (
-      <div className="board" style={{ animation: "fadeIn 0.5s" }}>
-        <div className="columns">
-          {this.state.columns.map(column => {
-            return <Column data={column} />;
-          })}
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <div className="board" style={{ animation: "fadeIn 0.5s" }}>
+          <div className="columns">
+            {this.state.columns.map(column => {
+              return <Column data={column} />;
+            })}
+          </div>
+          <div className="addCol">
+            <input
+              onKeyPress={this.handleKeyPress}
+              id="newColumn"
+              onChange={this.onChange}
+              type="text"
+              placeholder="Add new Column"
+              value={this.state.newColumn}
+            />
+          </div>
         </div>
-        <div className="addCol">
-          <input
-            onKeyPress={this.handleKeyPress}
-            id="newColumn"
-            onChange={this.onChange}
-            type="text"
-            placeholder="Add new Column"
-            value={this.state.newColumn}
-          />
-        </div>
-      </div>
+      </DragDropContext>
     );
   }
 }

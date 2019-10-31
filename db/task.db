@@ -1,7 +1,7 @@
-{"name":"Stripe","column":"Street Fair","board":"Things to code","subTasks":[],"_id":"5wjFmfMrtIDBbjNK"}
+{"name":"Stripe","column":"Street Fair","board":"Things to code","subTasks":["Read docs"],"_id":"5wjFmfMrtIDBbjNK"}
 {"name":"Icons","column":"Street Fair","board":"Things to code","subTasks":[],"_id":"79Fm3VcWHXAR4dgX"}
 {"name":"Pictures","column":"Street Fair","board":"Things to code","subTasks":[],"_id":"V2hyq8HwpBjDqBl3"}
-{"name":"Implement delete task","column":"Mikan","board":"Things to code","subTasks":["Add Route"],"_id":"YKEawggHJ46JBJmU"}
-{"name":"Add animations","column":"Mikan","board":"Things to code","subTasks":["board transition"],"_id":"jNvM3ntK04Z7T6BI"}
+{"name":"Stripe Backend","column":"Street Fair","board":"Things to code","subTasks":[],"_id":"bTC168ap9a2Tl8Sd"}
+{"name":"Add animations","column":"Mikan","board":"Things to code","subTasks":[],"_id":"jNvM3ntK04Z7T6BI"}
+{"name":"Add React Beautiful DND","column":"Mikan","board":"Things to code","subTasks":[],"_id":"lg34aHNwy1SSaoB0"}
 {"name":"Landing Page","column":"Street Fair","board":"Things to code","subTasks":[],"_id":"lxuoBLAn1AFifWl9"}
-{"name":"Design","column":"Street Fair","board":"Things to code","subTasks":[],"_id":"oW4qa7KtSmncEb13"}

@@ -27,7 +27,6 @@ app.get("/new-board", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(docs);
       res.json({ message: "success", name: docs.name });
     }
   });
@@ -40,7 +39,6 @@ app.get("/new-column", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(docs);
       res.json({ message: "success", name: docs.name, board: docs.board });
     }
   });
@@ -64,7 +62,6 @@ app.post("/update-sub", (req, res) => {
 //endpoint for retrieving list of boards
 app.get("/boards", (req, res) => {
   boarddb.find({}, (err, docs) => {
-    console.log(docs);
     res.json(docs);
   });
 });
@@ -73,7 +70,6 @@ app.get("/boards", (req, res) => {
 app.get("/columns", (req, res) => {
   let boardName = req.query.board;
   columndb.find({ board: boardName }, (err, docs) => {
-    console.log(docs);
     res.json(docs);
   });
 });
@@ -87,8 +83,16 @@ app.get("/tasks", (req, res) => {
     if (err) {
       console.log(err);
     }
-    console.log(docs);
+
     res.json(docs);
+  });
+});
+
+//endpoint for deleting a task
+app.get("/delete-task", (req, res) => {
+  taskdb.remove({ _id: req.query.id }, {}, function(err, numRemoved) {
+    // numRemoved = 1
+    res.json(numRemoved);
   });
 });
 

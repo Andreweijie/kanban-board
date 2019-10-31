@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Draggable } from "react-beautiful-dnd";
 
 export default class Task extends Component {
   state = {
@@ -57,33 +58,43 @@ export default class Task extends Component {
   };
   render() {
     return (
-      <div className="task" style={{ animation: "fadeIn 1s" }}>
-        <div className="head">
-          <h1>{this.props.data.name}</h1>
-          <img
-            className="delete"
-            onClick={() => this.props.delete(this.props.data)}
-            src="https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/close-512.png"
-          />
-        </div>
-        <ul>
-          {this.state.subTasks.map(tasks => {
-            return (
-              <li style={{ animation: "fadeIn 1s" }}>
-                {tasks}
-                <button onClick={() => this.removeSub(tasks)}>X</button>
-              </li>
-            );
-          })}
-          <input
-            id="subAdd"
-            type="text"
-            onChange={this.onChange}
-            onKeyPress={this.handleKeyPress}
-            value={this.state.subAdd}
-          />
-        </ul>
-      </div>
+      <Draggable draggableId={this.props.data._id} index={this.props.index}>
+        {provided => (
+          <div
+            ref={provided.ref}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            className="task"
+            style={{ animation: "fadeIn 1s" }}
+          >
+            <div className="head">
+              <h1>{this.props.data.name}</h1>
+              <img
+                className="delete"
+                onClick={() => this.props.delete(this.props.data)}
+                src="https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/close-512.png"
+              />
+            </div>
+            <ul>
+              {this.state.subTasks.map(tasks => {
+                return (
+                  <li style={{ animation: "fadeIn 1s" }}>
+                    {tasks}
+                    <button onClick={() => this.removeSub(tasks)}>X</button>
+                  </li>
+                );
+              })}
+              <input
+                id="subAdd"
+                type="text"
+                onChange={this.onChange}
+                onKeyPress={this.handleKeyPress}
+                value={this.state.subAdd}
+              />
+            </ul>
+          </div>
+        )}
+      </Draggable>
     );
   }
 }

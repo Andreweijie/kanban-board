@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { CSSTransition } from "react-transition-group";
 import Task from "./Task";
+import { Droppable } from "react-beautiful-dnd";
 
 export default class Column extends Component {
   state = {
@@ -62,29 +63,20 @@ export default class Column extends Component {
     }
   };
 
-  updateTasks = tasks => {
-    fetch("/update-tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        name: this.props.data.name,
-        board: this.props.board,
-        column: this.props.column,
-        subTasks: this.state.subTasks
-      })
-    });
-  };
-
   deleteTask = taskToRemove => {
     const newArray = this.state.tasks.filter(task => {
       return task != taskToRemove;
     });
-    this.setState({
-      tasks: newArray
-    });
+    this.setState(
+      {
+        tasks: newArray
+      },
+      () => {
+        fetch(`/delete-task?id=${taskToRemove._id}`)
+          .then(res => res.json())
+          .then(data => console.log(data));
+      }
+    );
   };
 
   onChange = e => {
@@ -92,30 +84,40 @@ export default class Column extends Component {
   };
   render() {
     return (
-      <div className="column" style={{ animation: "fadeIn 0.5s" }}>
-        <h1>{this.props.data.name}</h1>
-        {this.state.tasks.map(task => {
-          return (
-            <Task
-              delete={this.deleteTask}
-              column={this.props.data.name}
-              board={this.props.data.board}
-              data={task}
-              sub={task.subTasks}
+      <Droppable droppableId={this.props.data._id}>
+        {provided => (
+          <div
+            ref={provided.ref}
+            {...provided.droppableProps}
+            className="column"
+            style={{ animation: "fadeIn 0.5s" }}
+          >
+            <h1>{this.props.data.name}</h1>
+            {this.state.tasks.map((task, index) => {
+              return (
+                <Task
+                  delete={this.deleteTask}
+                  column={this.props.data.name}
+                  board={this.props.data.board}
+                  data={task}
+                  sub={task.subTasks}
+                  index={index}
+                />
+              );
+            })}
+            {provided.placeholder}
+            <input
+              id="newtask"
+              onChange={this.onChange}
+              type="text"
+              placeholder="Add Task"
+              onClick={this.showSubTask}
+              onKeyPress={this.handleKeyPress}
+              value={this.state.newtask}
             />
-          );
-        })}
-
-        <input
-          id="newtask"
-          onChange={this.onChange}
-          type="text"
-          placeholder="Add Task"
-          onClick={this.showSubTask}
-          onKeyPress={this.handleKeyPress}
-          value={this.state.newtask}
-        />
-      </div>
+          </div>
+        )}
+      </Droppable>
     );
   }
 }
