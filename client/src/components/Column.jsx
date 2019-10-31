@@ -92,32 +92,30 @@ export default class Column extends Component {
   };
   render() {
     return (
-      <CSSTransition classNames="ani1" in={true} timeout={2000}>
-        <div className="column" style={{ animation: "fadeIn 0.5s" }}>
-          <h1>{this.props.data.name}</h1>
-          {this.state.tasks.map(task => {
-            return (
-              <Task
-                delete={this.deleteTask}
-                column={this.props.data.name}
-                board={this.props.data.board}
-                data={task}
-                sub={task.subTasks}
-              />
-            );
-          })}
+      <div className="column" style={{ animation: "fadeIn 0.5s" }}>
+        <h1>{this.props.data.name}</h1>
+        {this.state.tasks.map(task => {
+          return (
+            <Task
+              delete={this.deleteTask}
+              column={this.props.data.name}
+              board={this.props.data.board}
+              data={task}
+              sub={task.subTasks}
+            />
+          );
+        })}
 
-          <input
-            id="newtask"
-            onChange={this.onChange}
-            type="text"
-            placeholder="Add Task"
-            onClick={this.showSubTask}
-            onKeyPress={this.handleKeyPress}
-            value={this.state.newtask}
-          />
-        </div>
-      </CSSTransition>
+        <input
+          id="newtask"
+          onChange={this.onChange}
+          type="text"
+          placeholder="Add Task"
+          onClick={this.showSubTask}
+          onKeyPress={this.handleKeyPress}
+          value={this.state.newtask}
+        />
+      </div>
     );
   }
 }
