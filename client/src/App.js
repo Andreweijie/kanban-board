@@ -9,14 +9,12 @@ class App extends Component {
   onDragEnd = () => {};
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="App">
-          <Sidebar />
-          <Switch>
-            <Route exact path="/board/:boardname" component={Board} />
-          </Switch>
-        </div>
-      </DragDropContext>
+      <div className="App">
+        <Sidebar />
+        <Switch>
+          <Route exact path="/board/:boardname" component={Board} />
+        </Switch>
+      </div>
     );
   }
 }

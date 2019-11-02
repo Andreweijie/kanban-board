@@ -1,6 +1,5 @@
 {"name":"Stripe","column":"Street Fair","board":"Things to code","subTasks":["Read docs"],"_id":"5wjFmfMrtIDBbjNK"}
-{"name":"Icons","column":"Street Fair","board":"Things to code","subTasks":[],"_id":"79Fm3VcWHXAR4dgX"}
-{"name":"Pictures","column":"Street Fair","board":"Things to code","subTasks":[],"_id":"V2hyq8HwpBjDqBl3"}
+{"name":"Icons","column":"Street Fair","board":"Things to code","subTasks":["Design"],"_id":"79Fm3VcWHXAR4dgX"}
 {"name":"Stripe Backend","column":"Street Fair","board":"Things to code","subTasks":[],"_id":"bTC168ap9a2Tl8Sd"}
 {"name":"Add animations","column":"Mikan","board":"Things to code","subTasks":[],"_id":"jNvM3ntK04Z7T6BI"}
 {"name":"Add React Beautiful DND","column":"Mikan","board":"Things to code","subTasks":[],"_id":"lg34aHNwy1SSaoB0"}
