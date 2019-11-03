@@ -67,9 +67,11 @@ export default class Board extends Component {
     ) {
       return;
     }
+    let oldData = this.state.columns;
   };
 
   render() {
+    console.log(this.state.columns);
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="board" style={{ animation: "fadeIn 0.5s" }}>

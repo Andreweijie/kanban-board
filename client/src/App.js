@@ -6,7 +6,6 @@ import "./scss/App.css";
 import { DragDropContext } from "react-beautiful-dnd";
 
 class App extends Component {
-  onDragEnd = () => {};
   render() {
     return (
       <div className="App">

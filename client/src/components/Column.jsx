@@ -83,7 +83,6 @@ export default class Column extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
   render() {
-    console.log(this.props.data);
     return (
       <div className="column" style={{ animation: "fadeIn 0.5s" }}>
         <h1>{this.props.data.name}</h1>
