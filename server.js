@@ -77,9 +77,8 @@ app.get("/columns", (req, res) => {
 //endpoint for retrieving list of tasks
 app.get("/tasks", (req, res) => {
   let boardName = req.query.board;
-  let columnName = req.query.column;
 
-  taskdb.find({ board: boardName, column: columnName }, (err, docs) => {
+  taskdb.find({ board: boardName }, (err, docs) => {
     if (err) {
       console.log(err);
     }

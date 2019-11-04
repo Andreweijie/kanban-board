@@ -10,27 +10,7 @@ export default class Column extends Component {
     column: "",
     board: ""
   };
-  componentDidMount() {
-    fetch(
-      `/tasks?column=${this.props.data.name}&board=${this.props.data.board}`
-    )
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ tasks: data });
-      });
-  }
-  componentDidUpdate(prevProps) {
-    if (this.props.data.board !== prevProps.data.board) {
-      // call the fetch function again
-      fetch(
-        `/tasks?column=${this.props.data.name}&board=${this.props.data.board}`
-      )
-        .then(res => res.json())
-        .then(data => {
-          this.setState({ tasks: data });
-        });
-    }
-  }
+
   handleKeyPress = event => {
     if (event.key === "Enter") {
       this.addNewTask();
@@ -97,7 +77,7 @@ export default class Column extends Component {
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {this.state.tasks.map((task, index) => {
+              {this.props.tasks.map((task, index) => {
                 return (
                   <Draggable key={index} draggableId={task._id} index={index}>
                     {provided => (

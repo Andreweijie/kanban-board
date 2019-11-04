@@ -5,10 +5,23 @@ import { DragDropContext } from "react-beautiful-dnd";
 export default class Board extends Component {
   state = {
     columns: [],
-    newColumn: ""
+    newColumn: "",
+    tasks: []
   };
 
   componentDidMount() {
+    this.fetchData();
+  }
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.match.params.boardname !== prevProps.match.params.boardname
+    ) {
+      // call the fetch function again
+      this.fetchData();
+    }
+  }
+
+  fetchData = () => {
     fetch("/columns?board=" + this.props.match.params.boardname)
       .then(res => res.json())
       .then(data => {
@@ -16,21 +29,15 @@ export default class Board extends Component {
           columns: data
         });
       });
-  }
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.match.params.boardname !== prevProps.match.params.boardname
-    ) {
-      // call the fetch function again
-      fetch("/columns?board=" + this.props.match.params.boardname)
-        .then(res => res.json())
-        .then(data => {
-          this.setState({
-            columns: data
-          });
+
+    fetch("/tasks?board=" + this.props.match.params.boardname)
+      .then(res => res.json())
+      .then(data1 => {
+        this.setState({
+          tasks: data1
         });
-    }
-  }
+      });
+  };
 
   handleKeyPress = event => {
     if (event.key === "Enter") {
@@ -67,17 +74,33 @@ export default class Board extends Component {
     ) {
       return;
     }
-    let oldData = this.state.columns;
+    if (destination.droppableId === source.droppableId) {
+      let tasks = this.state.tasks;
+      [tasks[source.index], tasks[destination.index]] = [
+        tasks[destination.index],
+        tasks[source.index]
+      ];
+      this.setState({
+        tasks
+      });
+    }
   };
 
   render() {
-    console.log(this.state.columns);
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="board" style={{ animation: "fadeIn 0.5s" }}>
           <div className="columns">
             {this.state.columns.map(column => {
-              return <Column key={column._id} data={column} />;
+              return (
+                <Column
+                  key={column._id}
+                  data={column}
+                  tasks={this.state.tasks.filter(e => {
+                    return e.column === column.name;
+                  })}
+                />
+              );
             })}
           </div>
           <div className="addCol">
