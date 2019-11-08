@@ -13,33 +13,13 @@ export default class Column extends Component {
 
   handleKeyPress = event => {
     if (event.key === "Enter") {
-      this.addNewTask();
-      this.setState({ [event.target.id]: "" });
-    }
-  };
-
-  addNewTask = () => {
-    if (this.state.newtask != "") {
-      const newTask = {
+      this.props.addNewTask({
         name: this.state.newtask,
         column: this.props.data.name,
         board: this.props.data.board,
         subTasks: []
-      };
-
-      fetch("/new-task", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newTask)
-      })
-        .then(res => res.json())
-        .then(data => {
-          this.setState({
-            tasks: this.state.tasks.concat(data)
-          });
-        });
+      });
+      this.setState({ [event.target.id]: "" });
     }
   };
 
@@ -63,6 +43,7 @@ export default class Column extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
   render() {
+    console.log(this.props.task);
     return (
       <div className="column" style={{ animation: "fadeIn 0.5s" }}>
         <h1>{this.props.data.name}</h1>
@@ -77,29 +58,35 @@ export default class Column extends Component {
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {this.props.tasks.map((task, index) => {
-                return (
-                  <Draggable key={index} draggableId={task._id} index={index}>
-                    {provided => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
+              {this.props.tasks.length !== 0
+                ? this.props.tasks.map((task, index) => {
+                    return (
+                      <Draggable
+                        key={index}
+                        draggableId={task._id}
+                        index={index}
                       >
-                        <Task
-                          key={task._id}
-                          delete={this.deleteTask}
-                          column={this.props.data.name}
-                          board={this.props.data.board}
-                          data={task}
-                          sub={task.subTasks}
-                          index={index}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                );
-              })}
+                        {provided => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <Task
+                              key={task._id}
+                              delete={this.deleteTask}
+                              column={this.props.data.name}
+                              board={this.props.data.board}
+                              data={task}
+                              sub={task.subTasks}
+                              index={index}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    );
+                  })
+                : null}
               {provided.placeholder}
             </div>
           )}

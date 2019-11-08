@@ -58,7 +58,7 @@ export default class Task extends Component {
   };
   render() {
     return (
-      <div className="task" style={{ animation: "fadeIn 1s" }}>
+      <div className="task">
         <div className="head">
           <h1>{this.props.data.name}</h1>
           <img
