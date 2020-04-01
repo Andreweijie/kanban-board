@@ -6,7 +6,7 @@ export default class Board extends Component {
   state = {
     columns: [],
     newColumn: "",
-    tasks: []
+    columnOrder: []
   };
 
   componentDidMount() {
@@ -22,6 +22,14 @@ export default class Board extends Component {
   }
 
   fetchData = async () => {
+    await fetch("/tasks?board=" + this.props.match.params.boardname)
+      .then(res => res.json())
+      .then(data1 => {
+        this.setState({
+          tasks: data1
+        });
+      });
+
     await fetch("/columns?board=" + this.props.match.params.boardname)
       .then(res => res.json())
       .then(data => {
@@ -30,31 +38,40 @@ export default class Board extends Component {
         });
       });
 
-    await fetch("/tasks?board=" + this.props.match.params.boardname)
-      .then(res => res.json())
-      .then(data1 => {
-        this.setState({
-          tasks: this.formatTaskData(data1)
-        });
-      });
+    this.setState(
+      {
+        columns: this.formatData(this.state.columns, this.state.tasks)
+      },
+      this.setState(
+        {
+          columnOrder: this.getColumnOrder(this.state.columns)
+        },
+        console.log(this.state.columnOrder)
+      )
+    );
   };
 
-  formatTaskData = data => {
-    let formatted = [];
-    let columnNames = this.state.columns.map(column => {
-      return column.name;
-    });
-    columnNames.map(ele => {
-      let tasks = data.filter(f => {
-        return f.column == ele;
+  formatData = (columns, tasks) => {
+    let newColumn = columns.map(column => {
+      let taskIds = [];
+      tasks.map(task => {
+        if (column.name === task.column) {
+          taskIds.push(task._id);
+        }
       });
-
-      formatted.push(tasks);
+      column.taskIds = taskIds;
+      return column;
     });
-
-    return formatted;
+    return newColumn;
   };
 
+  getColumnOrder = columns => {
+    let order = columns.map(column => {
+      return column._id;
+    });
+
+    return order;
+  };
   handleKeyPress = event => {
     if (event.key === "Enter") {
       this.addColumn();
@@ -94,61 +111,63 @@ export default class Board extends Component {
   };
 
   onDragEnd = result => {
-    console.log(result);
     const { destination, source, draggableId } = result;
-    let toInsert = this.state.tasks.filter(task => {
-      return task._id == draggableId;
-    });
-    if (destination == null) {
+
+    if (destination === null) {
       return;
     }
 
     if (
       destination.droppableId === source.droppableId &&
-      destination.index == source.index
+      destination.index === source.index
     ) {
       return;
     }
-    let column = this.state.columns.filter(column => {
-      return column._id == destination.droppableId;
-    });
-    let taskArray = this.state.tasks.filter(task => {
-      if (task.length !== 0) {
-        return task[0].column == column[0].name;
-      }
+
+    const column = this.state.columns.filter(column => {
+      return column._id === source.droppableId;
     })[0];
-    taskArray.splice(source.index, 1);
-    taskArray.splice(destination.index, 0, toInsert[0]);
-    let newTasksArray = this.state.tasks.map(e => {
-      if (e.length !== 0) {
-        if (e[0].column == taskArray[0].column) {
-          return taskArray;
-        }
+    const newTaskIds = Array.from(column.taskIds);
+
+    newTaskIds.splice(source.index, 1);
+    newTaskIds.splice(destination.index, 0, draggableId);
+
+    column.taskIds = newTaskIds;
+
+    const newColumns = this.state.columns.map(col => {
+      if (col._id === source.droppableId) {
+        return column;
       } else {
-        return e;
+        return col;
       }
     });
-    console.log(newTasksArray);
+
+    this.setState({
+      columns: newColumns
+    });
   };
 
   render() {
-    console.log(this.state.tasks);
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="board" style={{ animation: "fadeIn 0.5s" }}>
           <div className="columns">
-            {this.state.tasks.length !== 0
-              ? this.state.columns.map((column, index) => {
-                  return (
-                    <Column
-                      addNewTask={this.addNewTask}
-                      key={column._id}
-                      data={column}
-                      tasks={this.state.tasks[index]}
-                    />
-                  );
-                })
-              : null}
+            {this.state.columnOrder.map(columnId => {
+              const column = this.state.columns.filter(column => {
+                return column._id === columnId;
+              })[0];
+              const tasks = this.state.tasks.filter(task => {
+                return column.name === task.column;
+              });
+              return (
+                <Column
+                  addNewTask={this.addNewTask}
+                  key={column._id}
+                  data={column}
+                  tasks={tasks}
+                />
+              );
+            })}
           </div>
           <div className="addCol">
             <input

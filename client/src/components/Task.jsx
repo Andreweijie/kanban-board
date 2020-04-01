@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Draggable } from "react-beautiful-dnd";
 
 export default class Task extends Component {
   state = {
@@ -50,7 +49,7 @@ export default class Task extends Component {
     this.setState(
       {
         subTasks: this.state.subTasks.filter(e => {
-          return e != task;
+          return e !== task;
         })
       },
       () => this.sendSubs()
@@ -60,7 +59,7 @@ export default class Task extends Component {
     return (
       <div className="task">
         <div className="head">
-          <h1>{this.props.data.name}</h1>
+          {this.props.data ? <h1>{this.props.data.name}</h1> : null}
           <img
             className="delete"
             onClick={() => this.props.delete(this.props.data)}
@@ -68,14 +67,16 @@ export default class Task extends Component {
           />
         </div>
         <ul>
-          {this.state.subTasks.map((tasks, index) => {
-            return (
-              <li key={index} style={{ animation: "fadeIn 1s" }}>
-                {tasks}
-                <button onClick={() => this.removeSub(tasks)}>X</button>
-              </li>
-            );
-          })}
+          {this.state.subTasks
+            ? this.state.subTasks.map((tasks, index) => {
+                return (
+                  <li key={index} style={{ animation: "fadeIn 1s" }}>
+                    {tasks}
+                    <button onClick={() => this.removeSub(tasks)}>X</button>
+                  </li>
+                );
+              })
+            : null}
           <input
             id="subAdd"
             type="text"

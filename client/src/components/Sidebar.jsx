@@ -40,10 +40,10 @@ export default class Sidebar extends Component {
       <div className="sidebar">
         <img src={require("../MIKAN.png")} />
         <h1>Boards</h1>
-        {this.state.boards.map(board => {
+        {this.state.boards.map((board, index) => {
           let query = "/board/" + board.name;
           return (
-            <Link style={{ animation: "fadeIn 1s" }} to={query}>
+            <Link key={index} style={{ animation: "fadeIn 1s" }} to={query}>
               {board.name}
             </Link>
           );

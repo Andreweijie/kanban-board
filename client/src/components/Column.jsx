@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { CSSTransition } from "react-transition-group";
 import Task from "./Task";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 export default class Column extends Component {
   state = {
-    tasks: [],
     newtask: "",
     column: "",
     board: ""
@@ -25,7 +23,7 @@ export default class Column extends Component {
 
   deleteTask = taskToRemove => {
     const newArray = this.state.tasks.filter(task => {
-      return task != taskToRemove;
+      return task !== taskToRemove;
     });
     this.setState(
       {
@@ -43,7 +41,6 @@ export default class Column extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
   render() {
-    console.log(this.props.task);
     return (
       <div className="column" style={{ animation: "fadeIn 0.5s" }}>
         <h1>{this.props.data.name}</h1>
@@ -58,14 +55,14 @@ export default class Column extends Component {
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {this.props.tasks.length !== 0
-                ? this.props.tasks.map((task, index) => {
+              {this.props.tasks
+                ? this.props.data.taskIds.map((taskId, index) => {
+                    const task = this.props.tasks.filter(task => {
+                      return task._id === taskId;
+                    })[0];
+                    console.log(task);
                     return (
-                      <Draggable
-                        key={index}
-                        draggableId={task._id}
-                        index={index}
-                      >
+                      <Draggable key={index} draggableId={taskId} index={index}>
                         {provided => (
                           <div
                             ref={provided.innerRef}
@@ -73,7 +70,7 @@ export default class Column extends Component {
                             {...provided.dragHandleProps}
                           >
                             <Task
-                              key={task._id}
+                              key={taskId}
                               delete={this.deleteTask}
                               column={this.props.data.name}
                               board={this.props.data.board}
